@@ -1,10 +1,9 @@
 [package]
 name = "tor-stream"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Draphar <draphar-code@protonmail.com>"]
 edition = "2018"
 description = "Rust interface for proxying network streams over the Tor network"
-license = "MIT"
 license = "MIT"
 documentation = "https://docs.rs/tor-stream/"
 repository = "https://github.com/Draphar/tor-stream"
