@@ -41,9 +41,9 @@
 
 #[macro_use]
 extern crate lazy_static;
-extern crate socks;
+pub extern crate socks;
 
-use socks::ToTargetAddr;
+pub use socks::ToTargetAddr;
 
 use socks::Socks5Stream;
 use std::io::{self, Read, Write};

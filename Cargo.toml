@@ -1,6 +1,6 @@
 [package]
 name = "tor-stream"
-version = "0.1.1"
+version = "0.2.0"
 authors = ["Draphar <draphar-code@protonmail.com>"]
 edition = "2018"
 description = "Rust interface for proxying network streams over the Tor network"
