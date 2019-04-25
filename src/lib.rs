@@ -45,10 +45,10 @@ extern crate socks;
 
 use socks::ToTargetAddr;
 
-use std::ops::Deref;
 use socks::Socks5Stream;
 use std::io::{self, Read, Write};
-use std::net::{SocketAddr, SocketAddrV4, Ipv4Addr, TcpStream};
+use std::net::{Ipv4Addr, SocketAddr, SocketAddrV4, TcpStream};
+use std::ops::Deref;
 
 lazy_static! {
     /// The default TOR socks5 proxy address, `127.0.0.1:9050`.
@@ -82,26 +82,28 @@ impl TorStream {
         Socks5Stream::connect(TOR_PROXY.deref(), destination)
             .map(|stream| TorStream(stream.into_inner()))
     }
-    
+
     /// Connects to a destination address over the Tor network.
     /// A Tor SOCKS5 proxy must be running at the `tor_proxy` address.
-    pub fn connect_with_address(tor_proxy: SocketAddr, destination: impl ToTargetAddr) -> io::Result<TorStream> {
-        Socks5Stream::connect(tor_proxy, destination)
-            .map(|stream| TorStream(stream.into_inner()))
+    pub fn connect_with_address(
+        tor_proxy: SocketAddr,
+        destination: impl ToTargetAddr,
+    ) -> io::Result<TorStream> {
+        Socks5Stream::connect(tor_proxy, destination).map(|stream| TorStream(stream.into_inner()))
     }
-    
+
     /// Gets a reference to the underlying TCP stream.
     #[inline]
     pub fn get_ref(&self) -> &TcpStream {
         &self.0
     }
-    
+
     /// Gets a mutable reference to the underlying TCP stream.
     #[inline]
     pub fn get_mut(&mut self) -> &mut TcpStream {
         &mut self.0
     }
-    
+
     /// Unwraps the `TorStream`.
     #[inline]
     pub fn unwrap(self) -> TcpStream {
@@ -119,7 +121,7 @@ impl Write for TorStream {
     fn write(&mut self, buf: &[u8]) -> io::Result<usize> {
         self.0.write(buf)
     }
-    
+
     fn flush(&mut self) -> io::Result<()> {
         self.0.flush()
     }
