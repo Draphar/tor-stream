@@ -61,15 +61,21 @@ fn check_clear_web(address: SocketAddr) {
 }
 
 fn check_hidden_service(address: SocketAddr) {
-    let mut stream = TorStream::connect_with_address(address, ("darkfailenbsdla5mal2mxn2uz66od5vtzd5qozslagrfzachha3f3id.onion", 80))
-        .unwrap_or_else(|e| {
-            if e.kind() == ErrorKind::ConnectionRefused {
-                eprintln!("Connection refused, is Tor running?");
-            } else {
-                eprintln!("Failed to connect: {}", e);
-            };
-            exit(1);
-        });
+    let mut stream = TorStream::connect_with_address(
+        address,
+        (
+            "darkfailenbsdla5mal2mxn2uz66od5vtzd5qozslagrfzachha3f3id.onion",
+            80,
+        ),
+    )
+    .unwrap_or_else(|e| {
+        if e.kind() == ErrorKind::ConnectionRefused {
+            eprintln!("Connection refused, is Tor running?");
+        } else {
+            eprintln!("Failed to connect: {}", e);
+        };
+        exit(1);
+    });
 
     stream
         .write_all(b"GET / HTTP/1.1\r\nConnection: Close\r\nHost: darkfailenbsdla5mal2mxn2uz66od5vtzd5qozslagrfzachha3f3id.onion\r\n\r\n")
