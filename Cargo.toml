@@ -12,5 +12,5 @@ keywords = ["tor", "networking", "proxy"]
 categories = ["network-programming"]
 
 [dependencies]
-lazy_static = "1.2.0"
-socks = "0.3.0"
+lazy_static = "1.4"
+socks = "0.3"
