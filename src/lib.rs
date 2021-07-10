@@ -18,9 +18,9 @@
 //!
 //! stream.write_all(b"GET / HTTP/1.1\r\nConnection: Close\r\nHost: www.example.com\r\n\r\n").expect("Failed to send request");
 //!
-//! // If you want the raw stream, call `unwrap`
+//! // If you want the raw stream, call `into_inner()`
 //!
-//! let mut stream = stream.unwrap();
+//! let mut stream = stream.into_inner();
 //!
 //! let mut buf = String::new();
 //! stream.read_to_string(&mut buf).expect("Failed to read response");
@@ -104,9 +104,15 @@ impl TorStream {
         &mut self.0
     }
 
-    /// Unwraps the `TorStream`.
+    #[doc(hidden)]
     #[inline]
     pub fn unwrap(self) -> TcpStream {
+        self.0
+    }
+
+    /// Unwraps the `TorStream`.
+    #[inline]
+    pub fn into_inner(self) -> TcpStream {
         self.0
     }
 }
