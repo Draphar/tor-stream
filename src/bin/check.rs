@@ -61,7 +61,7 @@ fn check_clear_web(address: SocketAddr) {
 }
 
 fn check_hidden_service(address: SocketAddr) {
-    let mut stream = TorStream::connect_with_address(address, ("wlupld3ptjvsgwqw.onion", 80))
+    let mut stream = TorStream::connect_with_address(address, ("darkfailenbsdla5mal2mxn2uz66od5vtzd5qozslagrfzachha3f3id.onion", 80))
         .unwrap_or_else(|e| {
             if e.kind() == ErrorKind::ConnectionRefused {
                 eprintln!("Connection refused, is Tor running?");
@@ -72,7 +72,7 @@ fn check_hidden_service(address: SocketAddr) {
         });
 
     stream
-        .write_all(b"GET / HTTP/1.1\r\nConnection: Close\r\nHost: wlupld3ptjvsgwqw.onion\r\n\r\n")
+        .write_all(b"GET / HTTP/1.1\r\nConnection: Close\r\nHost: darkfailenbsdla5mal2mxn2uz66od5vtzd5qozslagrfzachha3f3id.onion\r\n\r\n")
         .expect("Failed to send request");
 
     let mut buf = String::with_capacity(390);
